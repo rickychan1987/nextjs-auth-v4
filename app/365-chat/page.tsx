@@ -1,26 +1,11 @@
 import { Chat365, columns } from "./column";
 import { DataTable } from "./data-table";
-import { Certificate } from "@/data/365-chat";
-
-async function getData(): Promise<Chat365[]> {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-    // ...
-  ];
-}
+import { ssl_info } from "@/data/365-chat";
 
 export default async function DemoPage() {
-  const data = await getData();
-
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={ssl_info} />
     </div>
   );
 }

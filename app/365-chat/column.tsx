@@ -1,29 +1,35 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { Certificate } from "@/data/365-chat";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+
 export type Chat365 = {
   id: string;
-  domains: string;
-  download_cert: string;
+  domain_name: string;
   valid_date: string;
   expire_date: string;
-  remain_day: number;
+  remain_days: number;
   issuer: string;
-  ip: string;
+  ip_server: string;
   last_check: string;
 };
 
-export const columns: ColumnDef<Chat365>[] = [
+export const columns: ColumnDef<Certificate>[] = [
   {
-    accessorKey: "domains",
+    accessorKey: "domain_name",
     header: "Domain",
-  },
-  {
-    accessorKey: "download_cert",
-    header: "Download Cert",
   },
   {
     accessorKey: "valid_date",
@@ -34,15 +40,27 @@ export const columns: ColumnDef<Chat365>[] = [
     header: "Expire Date",
   },
   {
-    accessorKey: "remain_day",
-    header: "Remain Day",
+    accessorKey: "remain_days",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant={"ghost"}
+          onClick={() => {
+            column.toggleSorting(column.getIsSorted() === "asc");
+          }}
+        >
+          Remain day
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
     accessorKey: "issuer",
     header: "Issuer",
   },
   {
-    accessorKey: "ip",
+    accessorKey: "ip_server",
     header: "IP Address",
   },
   {
