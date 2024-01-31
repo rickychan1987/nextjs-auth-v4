@@ -11,6 +11,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../utils/auth";
 import { redirect } from "next/navigation";
 import SignInForm from "../components/SignInForm";
+import Image from "next/image";
+import BackGroundAniMate from "./../../components/ui/bg-anima";
 
 const AuthRoute = async () => {
   const session = await getServerSession(authOptions);
@@ -20,8 +22,16 @@ const AuthRoute = async () => {
   }
 
   return (
-    <div className="w-screen h-screen flex items-center justify-center">
-      <Card>
+    <div className="w-screen h-screen flex items-center justify-center ">
+      <BackGroundAniMate />
+      <Card className="flex flex-col">
+        <Image
+          src="/assets/images/paradise-logo.jpg"
+          alt="Paradise Logo"
+          width={100}
+          height={100}
+          className="object-contain"
+        />
         <CardHeader>
           <CardTitle>Please Sign In</CardTitle>
           <CardDescription>
